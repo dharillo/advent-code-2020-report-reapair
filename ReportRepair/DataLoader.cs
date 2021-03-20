@@ -1,4 +1,3 @@
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("ReportRepair.Tests")]
 namespace ReportRepair
 {
     using System;
