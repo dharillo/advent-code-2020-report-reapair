@@ -1,10 +1,15 @@
+/// <copyright file="DataLoaderTests.cs" company="David Harillo Sánchez">
+/// Copyright (C) David Harillo Sánchez. All rights reserved.
+/// Licensed under the LGPL v2.1 License. See the LICENSE file in the project root for full license information.
+/// </copyright>
 namespace ReportRepair
 {
-    using Moq;
-    using NUnit.Framework;
-    using System.IO.Abstractions;
     using System;
     using System.Collections.Generic;
+    using System.IO.Abstractions;
+
+    using Moq;
+    using NUnit.Framework;
 
     [TestFixture]
     public class DataLoaderTests
@@ -17,9 +22,9 @@ namespace ReportRepair
         [SetUp]
         public void BeforeEach()
         {
-            fileSystemMock = new Mock<IFileSystem>();
-            fileSystemMock.Setup(x => x.File.ReadAllLines(It.IsAny<string>())).Returns(lines);
-            sut = new DataLoader(fileSystemMock.Object);
+            this.fileSystemMock = new Mock<IFileSystem>();
+            this.fileSystemMock.Setup(x => x.File.ReadAllLines(It.IsAny<string>())).Returns(this.lines);
+            this.sut = new DataLoader(this.fileSystemMock.Object);
         }
 
         [TestCase]
@@ -28,34 +33,36 @@ namespace ReportRepair
             var exception = Assert.Throws<ArgumentNullException>(() => new DataLoader(null));
             Assert.AreEqual("fileSystem", exception.ParamName);
         }
+
         [TestCase]
         public void Load_NullArgument_ShouldThrow()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => sut.Load(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => this.sut.Load(null));
             Assert.AreEqual("path", exception.ParamName);
         }
+
         [TestCase("")]
         [TestCase(" ")]
         [TestCase("\t")]
         public void Load_EmptyString_ShouldThrow(string invalidPath)
         {
-            var exception = Assert.Throws<ArgumentException>(() => sut.Load(invalidPath));
+            var exception = Assert.Throws<ArgumentException>(() => this.sut.Load(invalidPath));
             Assert.AreEqual("path", exception.ParamName);
         }
 
         [TestCase]
         public void Load_ReadAllLinesThrowsFileNotFound_ShouldThrow()
         {
-            fileSystemMock.Setup(x => x.File.ReadAllLines(It.IsAny<string>())).Throws<System.IO.FileNotFoundException>();
-            var exception = Assert.Throws<NotSupportedException>(() => sut.Load("some/path"));
+            this.fileSystemMock.Setup(x => x.File.ReadAllLines(It.IsAny<string>())).Throws<System.IO.FileNotFoundException>();
+            var exception = Assert.Throws<NotSupportedException>(() => this.sut.Load("some/path"));
             Assert.IsInstanceOf(typeof(System.IO.FileNotFoundException), exception.InnerException);
         }
 
         [TestCase]
         public void Load_ValidData_ReturnsExpectedValues()
         {
-            var result = sut.Load("some/path");
-            CollectionAssert.AreEquivalent(expectedValues, result);
+            var result = this.sut.Load("some/path");
+            CollectionAssert.AreEquivalent(this.expectedValues, result);
         }
     }
 }

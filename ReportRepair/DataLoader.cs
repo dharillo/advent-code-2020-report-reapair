@@ -1,19 +1,24 @@
+/// <copyright file="DataLoader.cs" company="David Harillo Sánchez">
+/// Copyright (C) David Harillo Sánchez. All rights reserved.
+/// Licensed under the LGPL v2.1 License. See the LICENSE file in the project root for full license information.
+/// </copyright>
 namespace ReportRepair
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
     using System.IO.Abstractions;
+    using System.Linq;
 
     /// <summary>
     /// Loader class for the input data from a file
     /// </summary>
     internal class DataLoader
     {
-        private readonly IFileSystem _fileSystem;
+        private readonly IFileSystem fileSystem;
+
         internal DataLoader(IFileSystem fileSystem)
         {
-            _fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
+            this.fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
         }
 
         /// <summary>
@@ -30,13 +35,15 @@ namespace ReportRepair
             {
                 throw new ArgumentNullException(nameof(path));
             }
+
             if (string.IsNullOrWhiteSpace(path))
             {
                 throw new ArgumentException("The path cannot be empty", nameof(path));
             }
+
             try
             {
-                return LoadInternal(path);
+                return this.LoadInternal(path);
             }
             catch (Exception e)
             {
@@ -46,7 +53,7 @@ namespace ReportRepair
 
         private IEnumerable<int> LoadInternal(string path)
         {
-            var lines = this._fileSystem.File.ReadAllLines(path);
+            var lines = this.fileSystem.File.ReadAllLines(path);
             return lines.Select(x => int.Parse(x));
         }
     }
