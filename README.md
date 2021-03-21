@@ -28,7 +28,7 @@ In this list, the two entries that sum to 2020 are 1721 and 299. Multiplying the
 
 Of course, your expense report is much larger. Find the two entries that sum to 2020; what do you get if you multiply them together?
 
-Link: https://adventofcode.com/2020/day/1
+Link: <https://adventofcode.com/2020/day/1>
 
 ## Prerequisites
 
@@ -41,5 +41,3 @@ Run the command ```dotnet run ReportRepair.sln --project ReportRepair/ReportRepa
 ## Tests
 
 Run the command ```dotnet test ReportReapir.sln```
-
-
