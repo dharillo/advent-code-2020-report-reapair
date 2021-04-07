@@ -7,13 +7,21 @@
 
 namespace ReportRepair
 {
-    using System;
+    using System.Threading.Tasks;
+    using CommandLine;
 
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task<int> Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            return await Parser.Default.ParseArguments<CommandLineOptions>(args)
+                .MapResult(
+                (CommandLineOptions opts) =>
+                {
+                    // TODO
+                    return Task.FromResult(-3);
+                },
+                errs => Task.FromResult(-1));
         }
     }
 }
