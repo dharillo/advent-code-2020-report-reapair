@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+  "settings": {
+    "documentationRules": {
+      "companyName": "David Harillo Sánchez",
+      "copyrightText": "Copyright (C) {companyName}. All rights reserved.\nLicensed under the {licenseName} License. See the {licenseFile} file in the project root for full license information.",
+      "variables": {
+        "licenseName": "LGPL v2.1",
+        "licenseFile": "LICENSE"
+      }
+    }
+  }
+}
