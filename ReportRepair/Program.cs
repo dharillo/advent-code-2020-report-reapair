@@ -7,8 +7,13 @@
 
 namespace ReportRepair
 {
+    using System;
+    using System.IO.Abstractions;
     using System.Threading.Tasks;
+
     using CommandLine;
+
+    using ReportRepair.IO;
 
     public class Program
     {
@@ -18,8 +23,17 @@ namespace ReportRepair
                 .MapResult(
                 (CommandLineOptions opts) =>
                 {
-                    // TODO
-                    return Task.FromResult(-3);
+                    try
+                    {
+                        var processor = new ReportRepairApplication(opts, new DataLoader(new FileSystem()), new DataSumFinder());
+                        processor.ProcessData();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.Error.WriteLine($"Unexpected error: {e.Message}");
+                        return Task.FromResult(-3);
+                    }
+                    return Task.FromResult(0);
                 },
                 errs => Task.FromResult(-1));
         }

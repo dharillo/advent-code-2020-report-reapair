@@ -2,7 +2,7 @@
 // Copyright (C) David Harillo Sánchez. All rights reserved.
 // Licensed under the LGPL v2.1 License. See the LICENSE file in the project root for full license information.
 // </copyright>
-namespace ReportRepair
+namespace ReportRepair.IO
 {
     using System;
     using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace ReportRepair
     /// <summary>
     /// Loader class for the input data from a file.
     /// </summary>
-    internal class DataLoader
+    internal class DataLoader : IDataLoader
     {
         private readonly IFileSystem fileSystem;
 
@@ -21,7 +21,7 @@ namespace ReportRepair
         /// </summary>
         /// <param name="fileSystem">Facade to access to the file system.</param>
         /// <exception cref="System.ArgumentNullException">The <paramref name="fileSystem"/> is <c>null</c>.</exception>
-        internal DataLoader(IFileSystem fileSystem)
+        public DataLoader(IFileSystem fileSystem)
         {
             this.fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
         }
@@ -34,7 +34,7 @@ namespace ReportRepair
         /// <exception cref="System.ArgumentNullException">The <paramref name="path"/> is <c>null</c>.</exception>
         /// <exception cref="System.ArgumentException">The <paramref name="path"/> is empty or contains only whitespaces.</exception>
         /// <exception cref="System.NotSupportedException">The <paramref name="path"/> file does not contain valid data.</exception>
-        internal IEnumerable<int> Load(string path)
+        public IEnumerable<int> Load(string path)
         {
             if (path == null)
             {

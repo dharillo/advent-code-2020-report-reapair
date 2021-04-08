@@ -2,7 +2,7 @@
 // Copyright (C) David Harillo Sánchez. All rights reserved.
 // Licensed under the LGPL v2.1 License. See the LICENSE file in the project root for full license information.
 // </copyright>
-namespace ReportRepair
+namespace ReportRepair.IO
 {
     /// <summary>
     /// Application command line options.

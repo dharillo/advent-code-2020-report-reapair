@@ -29,4 +29,7 @@
     <ProjectReference Include="..\ReportRepair\ReportRepair.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="IO\" />
+  </ItemGroup>
 </Project>
